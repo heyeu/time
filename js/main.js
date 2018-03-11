@@ -1,25 +1,24 @@
-function init(color){
+let c = document.getElementById("canvas");
+let ctx = c.getContext("2d");
+let grid = [];
+let colors = [];
+let ttz = 25;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  let c = document.getElementById("canvas");
-  let ctx = c.getContext("2d");
+let w = window.innerWidth/25;
 
-  canvas.style.width = window.innerWidth;
-  canvas.style.height = window.innerHeight;
-
-  ctx.fillStyle = color;
-  ctx.fillRect(0,0, innerWidth, innerHeight);
-
-}
-
-function grid(){
-  for (let i = 0; i < 25; i++){
-
+function createTimeZone(color){
+  for (let i = 0; i < ttz; i++){
+    ctx.fillStyle = color;
+    ctx.fillRect((i * w) ,0, w-5, canvas.height);
+    // grid.push(ttz[i]);
+    // console.log(grid[5]);
   }
 }
 
-
 function refreshData() {
-  x = 1;  // x = seconds
+
  	let d = new Date()
  	let h = d.getHours();
  	let m = d.getMinutes();
@@ -29,14 +28,19 @@ function refreshData() {
  	if (m<=9) {m = '0'+m};
 	if (s<=9) {s = '0'+s};
 
+  for(let i = 0; i < ttz; i++){
+
+    colors.push(ttz[i]);
+    console.log(colors[5]);
+  }
  	let	color = '#'+h+m+s;
 
-  init(color);
+  createTimeZone(color);
+
     // $("div.background").css("background-color", color );
     // $("p#hex").text(color);
 
-    setTimeout(refreshData, x*1000);
+    setTimeout(refreshData, 1000);
 }
-
 
 refreshData(); // execute function
